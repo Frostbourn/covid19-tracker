@@ -11,13 +11,12 @@ import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 
-import { fetchData, fetchDailyData } from "./api";
+import { fetchData } from "./api";
 
 class App extends React.Component {
   state = {
     data: {},
     country: "",
-    mapCenter: { lat: 34, lng: -40 },
     zoom: 3
   };
 
@@ -29,12 +28,16 @@ class App extends React.Component {
 
   handleCountryChange = async (country) => {
     const data = await fetchData(country);
-
-    this.setState({ data: data, country: country });
+    console.log(data);
+    this.setState({
+      data: data,
+      country: country,
+      zoom: 6
+    });
   };
 
   render() {
-    const { data, country, mapCenter, zoom } = this.state;
+    const { data, country, zoom } = this.state;
 
     return (
       <div className="app">
@@ -51,7 +54,7 @@ class App extends React.Component {
           <div className="app__stats">
             <Cards data={data} />
           </div>
-          <Map center={mapCenter} zoom={zoom} />
+          <Map data={data} zoom={zoom} />
         </div>
         <Card className="app__right">
           <CardContent>

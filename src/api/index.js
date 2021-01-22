@@ -14,6 +14,7 @@ export const fetchData = async (country) => {
   try {
     const {
       data: {
+        countryInfo,
         cases,
         todayCases,
         recovered,
@@ -25,6 +26,7 @@ export const fetchData = async (country) => {
     } = await axios.get(changableUrl);
 
     const defaultData = {
+      countryInfo,
       cases,
       todayCases,
       recovered,
@@ -56,7 +58,7 @@ export const fetchDailyData = async () => {
   }
 };
 
-export const fetchCountries = async () => {
+export const fetchCountries = async (country) => {
   try {
     const { data } = await axios.get(
       `https://disease.sh/v3/covid-19/countries`
@@ -64,8 +66,11 @@ export const fetchCountries = async () => {
 
     const modifiedCountryData = data.map((countriesData) => ({
       name: countriesData.country,
-      activeCases: countriesData.active
+      activeCases: countriesData.active,
+      lat: countriesData.countryInfo.lat,
+      long: countriesData.countryInfo.long
     }));
+
     return modifiedCountryData;
   } catch (error) {
     console.log(error);
