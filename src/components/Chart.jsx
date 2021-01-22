@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Line, Bar } from "react-chartjs-2";
 
+import { nFormat } from "../utils";
 import { fetchDailyData } from "../api";
 
-const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
+const Chart = ({
+  data: {
+    cases,
+    todayCases,
+    recovered,
+    todayRecovered,
+    deaths,
+    todayDeaths,
+    updated
+  },
+  country
+}) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
@@ -20,33 +32,44 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
         labels: dailyData.map(({ date }) => date),
         datasets: [
           {
-            data: dailyData.map(({ confirmed }) => confirmed),
-            label: "Infected",
-            borderColor: "rgb(0, 143, 251)",
-            fill: true
-          },
-          {
-            data: dailyData.map(({ deaths }) => deaths),
-            label: "Deaths",
-            borderColor: "rgb(254, 176, 25)",
-            backgroundColor: "rgba(254, 176, 25, 0.5)",
-            fill: true
+            data: dailyData.map(({ dailyConfirmed }) => dailyConfirmed),
+            borderColor: "#CC1034",
+            backgroundColor: "rgba(204, 16, 62, 0.5)"
           }
         ]
       }}
       options={{
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              return nFormat(tooltipItem.yLabel);
+            }
+          }
+        },
         scales: {
+          xAxes: [
+            {
+              type: "time"
+            }
+          ],
           yAxes: [
             {
+              grindLines: {
+                display: false
+              },
               ticks: {
                 beginAtZero: true,
-                stepSize: 5000000,
+                stepSize: 1000,
                 userCallback: function (value, index, values) {
-                  value = value.toString();
-                  value = value.split(/(?=(?:...)*$)/);
-
-                  value = value.join(".");
-                  return value;
+                  return nFormat(value);
                 }
               }
             }
@@ -56,7 +79,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
     />
   ) : null;
 
-  const barChart = confirmed ? (
+  const barChart = cases ? (
     <Bar
       data={{
         labels: ["Infected", "Recovered", "Deaths"],
@@ -68,27 +91,31 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
               "rgb(0, 227, 150)",
               "rgb(254, 176, 25)"
             ],
-            data: [confirmed.value, recovered.value, deaths.value]
+            data: [cases, recovered, deaths]
           }
         ]
       }}
       options={{
-        legend: { display: false },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              return nFormat(tooltipItem.yLabel);
+            }
+          }
+        },
         title: { display: true, text: `Current state in ${country}` },
         scales: {
           yAxes: [
             {
-              ticks: {
-                beginAtZero: true,
-                stepSize: 500000,
-                userCallback: function (value, index, values) {
-                  value = value.toString();
-                  value = value.split(/(?=(?:...)*$)/);
-
-                  value = value.join(".");
-                  return value;
-                }
-              }
+              display: false
             }
           ]
         }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { fetchCountries } from "../api";
-import { sortData } from "../utils";
+import { sortData, nFormat } from "../utils";
 
 function Table() {
   const [activeCases, setActiveCases] = useState([]);
@@ -20,7 +20,7 @@ function Table() {
         <tr key={i}>
           <td>{country.name}</td>
           <td>
-            <strong>{country.activeCases}</strong>
+            <strong>{nFormat(country.activeCases)}</strong>
           </td>
         </tr>
       ))}

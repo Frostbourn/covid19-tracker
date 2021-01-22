@@ -53,7 +53,7 @@ class App extends React.Component {
           <CardContent>
             <h3>Live Cases by Country</h3>
             <Table />
-            <h3>Worldwide new cases</h3>
+            <h3>Daily change</h3>
             <Chart data={data} country={country} />
           </CardContent>
         </Card>
