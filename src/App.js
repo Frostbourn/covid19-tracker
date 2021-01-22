@@ -8,13 +8,17 @@ import Table from "./components/Table";
 
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 
-import styles from "./App.css";
+import "./App.css";
+import "leaflet/dist/leaflet.css";
+
 import { fetchData, fetchDailyData } from "./api";
 
 class App extends React.Component {
   state = {
     data: {},
-    country: ""
+    country: "",
+    mapCenter: { lat: 34, lng: -40 },
+    zoom: 3
   };
 
   async componentDidMount() {
@@ -30,11 +34,11 @@ class App extends React.Component {
   };
 
   render() {
-    const { data, country } = this.state;
+    const { data, country, mapCenter, zoom } = this.state;
 
     return (
       <div className="app">
-        <div className="app_left">
+        <div className="app__left">
           <div className="app__header">
             <div className="app__logo">
               <h1>COVID19 TRACKER</h1>{" "}
@@ -47,13 +51,17 @@ class App extends React.Component {
           <div className="app__stats">
             <Cards data={data} />
           </div>
-          <Map />
+          <Map center={mapCenter} zoom={zoom} />
         </div>
-        <Card className="app_right">
+        <Card className="app__right">
           <CardContent>
-            <h3>Live Cases by Country</h3>
+            <h3>Active cases by country</h3>
             <Table />
-            <h3>Daily change</h3>
+            <h3>
+              {country
+                ? `Current total state in ${country}`
+                : `Daily change worldwide`}
+            </h3>
             <Chart data={data} country={country} />
           </CardContent>
         </Card>

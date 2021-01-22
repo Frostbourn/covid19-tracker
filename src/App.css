@@ -1,15 +1,17 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  background-color: #f2f2f2;
+  background-color: #ecedf0;
 }
 .app {
   display: flex;
+  width: 100%;
+  padding: 50px 0;
   justify-content: space-evenly;
 }
 
 .app__left {
-  flex: 0.9;
+  flex: 0.7;
 }
 
 .app__header {
@@ -24,9 +26,71 @@ body {
   justify-content: space-between;
   padding: 0 30px;
 }
+.MuiCard-root {
+  padding: 30px;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12),
+    0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1) !important;
+  background-color: #fff !important;
+  border: none !important;
+  border-radius: 0.625rem !important;
+}
+
+.infected {
+  border-bottom: 10px solid #1685ff !important;
+}
+
+.recovered {
+  border-bottom: 10px solid #57d597 !important;
+}
+
+.deaths {
+  border-bottom: 10px solid #ff4169 !important;
+}
+.map {
+  height: 500px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-top: 16px;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+}
+
+.map .leaflet-container {
+  height: 100%;
+  border-radius: 12px;
+}
+
+.info-flag img {
+  width: 100px;
+  border-radius: 5px;
+}
+
+.info-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+.info-container {
+  width: 150px;
+}
+
+.info-flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 8px;
+}
+
+.info-confirmed,
+.info-recovered,
+.info-deaths {
+  font-size: 16px;
+  margin-top: 5px;
+}
 
 .app__right {
-  max-width: 600px;
+  width: 400px;
 }
 
 .table {
@@ -55,6 +119,8 @@ body {
   }
 
   .app__right {
+    margin: 0 auto;
+    width: 75%;
     justify-content: center !important;
   }
 }

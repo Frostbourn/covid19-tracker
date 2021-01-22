@@ -17,12 +17,12 @@ const Cards = ({
     return "Loading...";
   }
   return (
-    <Grid container justify="center" spacing={3}>
+    <Grid container justify="center" spacing={5}>
       <Grid item xs={10} md={4}>
-        <Card style={{ backgroundColor: "#EC407A" }}>
+        <Card className="infected">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected today
+              Infected
             </Typography>
             <Typography variant="h4">
               <CountUp
@@ -40,10 +40,10 @@ const Cards = ({
         </Card>
       </Grid>
       <Grid item xs={10} md={4}>
-        <Card style={{ backgroundColor: "#009688" }}>
+        <Card className="recovered">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Recovered today
+              Recovered
             </Typography>
             <Typography variant="h4">
               <CountUp
@@ -61,10 +61,10 @@ const Cards = ({
         </Card>
       </Grid>
       <Grid item xs={10} md={4}>
-        <Card style={{ backgroundColor: "#9C27B0" }}>
+        <Card className="deaths">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Deaths today
+              Deaths
             </Typography>
             <Typography variant="h4">
               <CountUp

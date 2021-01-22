@@ -33,8 +33,8 @@ const Chart = ({
         datasets: [
           {
             data: dailyData.map(({ dailyConfirmed }) => dailyConfirmed),
-            borderColor: "#CC1034",
-            backgroundColor: "rgba(204, 16, 62, 0.5)"
+            borderColor: "#1685FF",
+            backgroundColor: "rgba(22, 135, 255, 0.452)"
           }
         ]
       }}
@@ -57,21 +57,18 @@ const Chart = ({
         scales: {
           xAxes: [
             {
-              type: "time"
+              type: "time",
+              time: {
+                unit: "month",
+                displayFormats: {
+                  quarter: "MMM YYYY"
+                }
+              }
             }
           ],
           yAxes: [
             {
-              grindLines: {
-                display: false
-              },
-              ticks: {
-                beginAtZero: true,
-                stepSize: 1000,
-                userCallback: function (value, index, values) {
-                  return nFormat(value);
-                }
-              }
+              display: false
             }
           ]
         }
@@ -86,11 +83,7 @@ const Chart = ({
         datasets: [
           {
             label: "People",
-            backgroundColor: [
-              "rgb(0, 143, 251)",
-              "rgb(0, 227, 150)",
-              "rgb(254, 176, 25)"
-            ],
+            backgroundColor: ["#1685FF", "#57D597", "#FF4169"],
             data: [cases, recovered, deaths]
           }
         ]
@@ -111,7 +104,7 @@ const Chart = ({
             }
           }
         },
-        title: { display: true, text: `Current state in ${country}` },
+        //title: { display: true, text: `Current state in ${country}` },
         scales: {
           yAxes: [
             {
