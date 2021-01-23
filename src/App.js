@@ -16,8 +16,7 @@ import { fetchData } from "./api";
 class App extends React.Component {
   state = {
     data: {},
-    country: "",
-    zoom: 3
+    country: ""
   };
 
   async componentDidMount() {
@@ -37,7 +36,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { data, country, zoom } = this.state;
+    const { data, country } = this.state;
 
     return (
       <div className="app">
@@ -54,7 +53,7 @@ class App extends React.Component {
           <div className="app__stats">
             <Cards data={data} />
           </div>
-          <Map data={data} zoom={zoom} />
+          <Map data={data} />
         </div>
         <Card className="app__right">
           <CardContent>
