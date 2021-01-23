@@ -67,6 +67,10 @@ export const fetchCountries = async (country) => {
     const modifiedCountryData = data.map((countriesData) => ({
       name: countriesData.country,
       activeCases: countriesData.active,
+      cases: countriesData.cases,
+      recovered: countriesData.recovered,
+      deaths: countriesData.deaths,
+      flag: countriesData.countryInfo.flag,
       lat: countriesData.countryInfo.lat,
       long: countriesData.countryInfo.long
     }));

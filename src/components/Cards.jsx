@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
+import { nFormat } from "../utils";
 
 const Cards = ({
   data: {
@@ -22,9 +23,10 @@ const Cards = ({
         <Card className="infected">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              Coronavirus cases
             </Typography>
             <Typography variant="h4">
+              +
               <CountUp
                 start={0}
                 end={todayCases}
@@ -33,8 +35,7 @@ const Cards = ({
               />
             </Typography>
             <Typography color="textSecondary">
-              <CountUp start={0} end={cases} duration={2.5} separator="." />{" "}
-              Total
+              {nFormat(cases)} total
             </Typography>
           </CardContent>
         </Card>
@@ -46,6 +47,7 @@ const Cards = ({
               Recovered
             </Typography>
             <Typography variant="h4">
+              +
               <CountUp
                 start={0}
                 end={todayRecovered}
@@ -54,8 +56,7 @@ const Cards = ({
               />
             </Typography>
             <Typography color="textSecondary">
-              <CountUp start={0} end={recovered} duration={2.5} separator="." />{" "}
-              Total
+              {nFormat(recovered)} total
             </Typography>
           </CardContent>
         </Card>
@@ -67,6 +68,7 @@ const Cards = ({
               Deaths
             </Typography>
             <Typography variant="h4">
+              +
               <CountUp
                 start={0}
                 end={todayDeaths}
@@ -75,8 +77,7 @@ const Cards = ({
               />
             </Typography>
             <Typography color="textSecondary">
-              <CountUp start={0} end={deaths} duration={2.5} separator="." />{" "}
-              Total
+              {nFormat(deaths)} total
             </Typography>
           </CardContent>
         </Card>
