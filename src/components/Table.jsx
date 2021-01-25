@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { fetchCountries } from "../api";
-import { sortData, nFormat } from "../utils";
+import { sortData } from "../utils";
 
-function Table() {
+function Table({ handleCountryChange }) {
   const [activeCases, setActiveCases] = useState([]);
 
   useEffect(() => {
@@ -17,10 +17,18 @@ function Table() {
   return (
     <div className="table">
       {activeCases.map((country, i) => (
-        <tr key={i}>
-          <td>{country.name}</td>
+        <tr key={i} onClick={() => handleCountryChange(country.name)}>
           <td>
-            <strong>{nFormat(country.activeCases)}</strong>
+            <img
+              src={country.flag}
+              width="20"
+              style={{ paddingRight: "5px" }}
+              alt="country-flag"
+            />
+            {country.name}
+          </td>
+          <td>
+            <strong>{country.activeCases.toLocaleString()}</strong>
           </td>
         </tr>
       ))}

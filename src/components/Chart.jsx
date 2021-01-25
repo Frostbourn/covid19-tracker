@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Line, Bar } from "react-chartjs-2";
 
-import { nFormat } from "../utils";
 import { fetchDailyData } from "../api";
 
-const Chart = ({
-  data: {
-    cases,
-    todayCases,
-    recovered,
-    todayRecovered,
-    deaths,
-    todayDeaths,
-    updated
-  },
-  country
-}) => {
+const Chart = ({ data: { cases, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
@@ -29,7 +17,9 @@ const Chart = ({
   const lineChart = dailyData.length ? (
     <Line
       data={{
-        labels: dailyData.map(({ date }) => date),
+        labels: dailyData
+          .slice(Math.max(dailyData.length - 120, 0))
+          .map(({ date }) => date),
         datasets: [
           {
             data: dailyData.map(({ dailyConfirmed }) => dailyConfirmed),
@@ -50,7 +40,7 @@ const Chart = ({
         tooltips: {
           callbacks: {
             label: function (tooltipItem, data) {
-              return nFormat(tooltipItem.yLabel);
+              return tooltipItem.yLabel.toLocaleString();
             }
           }
         },
@@ -68,7 +58,12 @@ const Chart = ({
           ],
           yAxes: [
             {
-              display: false
+              display: true,
+              ticks: {
+                min: 0,
+                max: 150000,
+                stepSize: 10000
+              }
             }
           ]
         }
@@ -100,7 +95,7 @@ const Chart = ({
         tooltips: {
           callbacks: {
             label: function (tooltipItem, data) {
-              return nFormat(tooltipItem.yLabel);
+              return tooltipItem.yLabel.toLocaleString();
             }
           }
         },

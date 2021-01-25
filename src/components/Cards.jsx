@@ -23,9 +23,9 @@ const Cards = ({
         <Card className="infected">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Coronavirus cases
+              Cases
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               +
               <CountUp
                 start={0}
@@ -46,7 +46,7 @@ const Cards = ({
             <Typography color="textSecondary" gutterBottom>
               Recovered
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               +
               <CountUp
                 start={0}
@@ -67,7 +67,7 @@ const Cards = ({
             <Typography color="textSecondary" gutterBottom>
               Deaths
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               +
               <CountUp
                 start={0}

@@ -6,7 +6,7 @@ import CountryPicker from "./components/CountryPicker";
 import Map from "./components/Map";
 import Table from "./components/Table";
 
-import { Card, CardContent, Typography, Grid } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 
 import "./App.css";
 import "leaflet/dist/leaflet.css";
@@ -27,7 +27,7 @@ class App extends React.Component {
 
   handleCountryChange = async (country) => {
     const data = await fetchData(country);
-    console.log(data);
+
     this.setState({
       data: data,
       country: country,
@@ -58,8 +58,8 @@ class App extends React.Component {
         <Card className="app__right">
           <CardContent>
             <h3>Active cases by country</h3>
-            <Table />
-            <h3>
+            <Table handleCountryChange={this.handleCountryChange} />
+            <h3 style={{ paddingTop: "40px" }}>
               {country
                 ? `Current total state in ${country}`
                 : `Daily change worldwide`}

@@ -21,7 +21,7 @@ function Map({ data }) {
     };
     fetchAPI();
   }, []);
-  console.log(activeCases);
+
   return data.countryInfo ? (
     <div className="map">
       <MapContainer
