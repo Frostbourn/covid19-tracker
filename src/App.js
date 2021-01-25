@@ -8,6 +8,8 @@ import Table from "./components/Table";
 
 import { Card, CardContent } from "@material-ui/core";
 
+// import mainLogo from "./assets/images/mainLogo.png";
+
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 
@@ -43,6 +45,7 @@ class App extends React.Component {
         <div className="app__left">
           <div className="app__header">
             <div className="app__logo">
+              {/* <img src={mainLogo} alt="Covid-19 Tracker" width="80" /> */}
               <h1>COVID19 TRACKER</h1>{" "}
               <div className="header_update">
                 Last updated: {new Date(data.updated).toDateString()}

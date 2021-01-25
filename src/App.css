@@ -10,6 +10,10 @@ body {
   justify-content: space-evenly;
 }
 
+.app__logo img {
+  max-width: 80px;
+}
+
 .app__left {
   flex: 0.8;
 }
@@ -105,6 +109,11 @@ body {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.table tr:hover {
+  font-weight: bold;
 }
 
 .table td {
