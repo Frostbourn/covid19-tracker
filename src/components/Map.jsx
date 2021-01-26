@@ -5,8 +5,7 @@ import { nFormat } from "../utils";
 
 function SetViewOnClick({ coords, zoom }) {
   const map = useMap();
-  map.setView(coords, map.getZoom());
-  map.setZoom(zoom);
+  map.setView(coords, zoom);
 
   return null;
 }
