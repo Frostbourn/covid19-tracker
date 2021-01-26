@@ -43,10 +43,7 @@ class App extends React.Component {
         <div className="app__left">
           <div className="app__header">
             <div className="app__logo">
-              <h1>COVID19 TRACKER</h1>{" "}
-              <div className="header_update">
-                Last updated: {new Date(data.updated).toDateString()}
-              </div>
+              <h1>COVID19 TRACKER</h1>
             </div>
             <CountryPicker handleCountryChange={this.handleCountryChange} />
           </div>
