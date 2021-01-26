@@ -40,6 +40,11 @@ body {
   border-radius: 0.625rem !important;
 }
 
+.MuiPaper-root {
+  display: flex;
+  justify-content: center;
+}
+
 .infected {
   border-bottom: 10px solid #1685ff !important;
 }
