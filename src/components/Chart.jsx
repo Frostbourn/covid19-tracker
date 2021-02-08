@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Line, Bar } from "react-chartjs-2";
+import { Line, Pie } from "react-chartjs-2";
 
 import { fetchDailyData } from "../api";
 
@@ -34,7 +34,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
         },
         elements: {
           point: {
-            radius: 0
+            radius: 3
           }
         },
         tooltips: {
@@ -72,7 +72,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
   ) : null;
 
   const barChart = cases ? (
-    <Bar
+    <Pie
       data={{
         labels: ["Infected", "Recovered", "Deaths"],
         datasets: [
@@ -91,21 +91,6 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
           point: {
             radius: 0
           }
-        },
-        tooltips: {
-          callbacks: {
-            label: function (tooltipItem, data) {
-              return tooltipItem.yLabel.toLocaleString();
-            }
-          }
-        },
-        //title: { display: true, text: `Current state in ${country}` },
-        scales: {
-          yAxes: [
-            {
-              display: false
-            }
-          ]
         }
       }}
     />
