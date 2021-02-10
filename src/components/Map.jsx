@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, useMap, TileLayer, Circle, Popup } from "react-leaflet";
-import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
 function SetViewOnClick({ coords, zoom }) {
@@ -11,16 +10,6 @@ function SetViewOnClick({ coords, zoom }) {
 }
 
 const Map = ({ data, lat, lng, zoom }) => {
-  const [activeCases, setActiveCases] = useState([]);
-
-  useEffect(() => {
-    const fetchAPI = async () => {
-      return await data;
-    };
-    fetchAPI().then((res) => setActiveCases(res));
-  }, [data]);
-
-  console.log(data);
   return data ? (
     <div className="map">
       <MapContainer center={[lat, lng]} scrollWheelZoom={false}>

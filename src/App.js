@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 
 import Cards from "./components/Cards";
-import Chart from "./components/Chart";
+//import Chart from "./components/Chart";
 import CountryPicker from "./components/CountryPicker";
 import Map from "./components/Map";
 import Table from "./components/Table";
