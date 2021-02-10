@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MapContainer, useMap, TileLayer, Circle, Popup } from "react-leaflet";
 import { nFormat } from "../utils";
 
