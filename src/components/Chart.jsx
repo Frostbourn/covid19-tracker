@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Line, Pie } from "react-chartjs-2";
 
-import { fetchDailyData } from "../api";
+import { fetchCountries } from "../api";
 
 const Chart = ({ data: { cases, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setDailyData(await fetchDailyData());
+      setDailyData(await fetchCountries());
     };
 
     fetchAPI();
