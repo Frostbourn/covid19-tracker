@@ -1,7 +1,15 @@
-export const sortData = (data) => {
+export const sortDesc = (data) => {
   const sortedData = [...data];
 
   return sortedData.sort((a, b) => (a.activeCases > b.activeCases ? -1 : 1));
+};
+
+export const sortAlph = (data) => {
+  const sortedData = [...data];
+
+  return sortedData.sort((a, b) =>
+    a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
+  );
 };
 
 export const nFormat = (num) => {

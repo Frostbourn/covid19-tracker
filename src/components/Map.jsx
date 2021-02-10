@@ -10,104 +10,72 @@ function SetViewOnClick({ coords, zoom }) {
   return null;
 }
 
-function Map({ data }) {
+const Map = ({ data, lat, lng, zoom }) => {
   const [activeCases, setActiveCases] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const sortedData = await fetchCountries();
-      setActiveCases(sortedData);
+      return await data;
     };
-    fetchAPI();
-  }, []);
+    fetchAPI().then((res) => setActiveCases(res));
+  }, [data]);
 
-  return data.countryInfo ? (
+  console.log(data);
+  return data ? (
     <div className="map">
-      <MapContainer
-        center={[data.countryInfo.lat, data.countryInfo.long]}
-        scrollWheelZoom={false}
-      >
+      <MapContainer center={[lat, lng]} scrollWheelZoom={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {activeCases.map((country, i) => (
-          <Circle
-            center={[country.lat, country.long]}
-            fillOpacity={0.4}
-            color="red"
-            fillColor="red"
-            radius={Math.sqrt(country.activeCases) * 300}
-          >
-            <Popup>
-              <div className="info-container">
-                <div
-                  className="info-flag"
-                  style={{ backgroundImage: `url(${country.flag})` }}
-                ></div>
-                <div className="info-name">
-                  <strong>{country.name}</strong>
+        {data &&
+          !!data.length &&
+          data.map((country, i) => (
+            <Circle
+              key={i}
+              center={[country.lat, country.lng]}
+              fillOpacity={0.4}
+              stroke={false}
+              fillColor="red"
+              radius={Math.sqrt(country.activeCases) * 600}
+            >
+              <Popup>
+                <div className="info-container">
+                  <div className="info-name">
+                    {country.name == null ? country.country : country.name}
+                  </div>
+                  <div className="info-confirmed">
+                    Cases:{" "}
+                    {nFormat(
+                      country.cases == null
+                        ? country.totalConfirmed
+                        : country.cases
+                    )}
+                  </div>
+                  <div className="info-recovered">
+                    Recovered:{" "}
+                    {nFormat(
+                      country.recovered == null
+                        ? country.totalRecovered
+                        : country.recovered
+                    )}
+                  </div>
+                  <div className="info-deaths">
+                    Deaths:{" "}
+                    {nFormat(
+                      country.deaths == null
+                        ? country.totalDeaths
+                        : country.deaths
+                    )}
+                  </div>
                 </div>
-                <div className="info-confirmed">
-                  Cases: {nFormat(country.cases)}
-                </div>
-                <div className="info-recovered">
-                  Recovered: {nFormat(country.recovered)}
-                </div>
-                <div className="info-deaths">
-                  Deaths: {nFormat(country.deaths)}
-                </div>
-              </div>
-            </Popup>
-          </Circle>
-        ))}
-        <SetViewOnClick
-          coords={[data.countryInfo.lat, data.countryInfo.long]}
-          zoom={5}
-        />
+              </Popup>
+            </Circle>
+          ))}
+        <SetViewOnClick coords={[lat, lng]} zoom={zoom} />
       </MapContainer>
     </div>
-  ) : (
-    <div className="map">
-      <MapContainer center={[34.80746, -40.4796]} scrollWheelZoom={false}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {activeCases.map((country, i) => (
-          <Circle
-            center={[country.lat, country.long]}
-            fillOpacity={0.4}
-            color="red"
-            fillColor="red"
-            radius={Math.sqrt(country.activeCases) * 300}
-          >
-            <Popup>
-              <div className="info-container">
-                <div
-                  className="info-flag"
-                  style={{ backgroundImage: `url(${country.flag})` }}
-                ></div>
-                <div className="info-name">
-                  <strong>{country.name}</strong>
-                </div>
-                <div className="info-confirmed">
-                  Cases: {nFormat(country.cases)}
-                </div>
-                <div className="info-recovered">
-                  Recovered: {nFormat(country.recovered)}
-                </div>
-                <div className="info-deaths">
-                  Deaths: {nFormat(country.deaths)}
-                </div>
-              </div>
-            </Popup>
-          </Circle>
-        ))}
-        <SetViewOnClick coords={[34.80746, -40.4796]} zoom={2} />
-      </MapContainer>
-    </div>
-  );
-}
+  ) : null;
+};
 
 export default Map;

@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
+
+import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
 const Cards = ({
-  data: {
-    cases,
-    todayCases,
-    recovered,
-    todayRecovered,
-    deaths,
-    todayDeaths,
-    updated
-  }
+  dailyNewCases,
+  totalCases,
+  dailyNewDeaths,
+  totalDeaths,
+  dailyNewRecovered,
+  totalRecovered
 }) => {
-  if (!cases) {
+  const [globalData, setGlobalData] = useState([]);
+
+  useEffect(() => {
+    const fetchAPI = async () => {
+      await fetchCountries().then((response) => {
+        setGlobalData(response[1].data);
+      });
+    };
+    fetchAPI();
+  }, [setGlobalData]);
+
+  if (!globalData.totalNewCases) {
     return "Loading...";
   }
   return (
@@ -29,13 +39,13 @@ const Cards = ({
               +
               <CountUp
                 start={0}
-                end={todayCases}
+                end={dailyNewCases}
                 duration={2.5}
                 separator="."
               />
             </Typography>
             <Typography color="textSecondary">
-              {nFormat(cases)} total
+              {nFormat(totalCases)} total
             </Typography>
           </CardContent>
         </Card>
@@ -50,13 +60,13 @@ const Cards = ({
               +
               <CountUp
                 start={0}
-                end={todayRecovered}
+                end={dailyNewRecovered}
                 duration={2.5}
                 separator="."
               />
             </Typography>
             <Typography color="textSecondary">
-              {nFormat(recovered)} total
+              {nFormat(totalRecovered)} total
             </Typography>
           </CardContent>
         </Card>
@@ -71,13 +81,13 @@ const Cards = ({
               +
               <CountUp
                 start={0}
-                end={todayDeaths}
+                end={dailyNewDeaths}
                 duration={2.5}
                 separator="."
               />
             </Typography>
             <Typography color="textSecondary">
-              {nFormat(deaths)} total
+              {nFormat(totalDeaths)} total
             </Typography>
           </CardContent>
         </Card>

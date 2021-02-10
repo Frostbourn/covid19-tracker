@@ -5,7 +5,6 @@ body {
 }
 .app {
   display: flex;
-  width: 100%;
   padding: 50px 0;
   justify-content: space-evenly;
 }
@@ -25,6 +24,14 @@ body {
   justify-content: space-between;
 }
 
+.MuiAutocomplete-listbox {
+  width: 100%;
+}
+
+.MuiCardContent-root {
+  flex: 1;
+}
+
 .app__stats {
   display: flex;
   justify-content: space-between;
@@ -42,6 +49,7 @@ body {
 
 .MuiPaper-root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -129,14 +137,24 @@ body {
   background-color: #f1f1f1;
 }
 
+@media (min-width: 1680px) {
+  .app {
+    padding: 50px 0 !important;
+  }
+
+  .app__right {
+    margin: 0 90px;
+  }
+}
+
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
   }
 
   .app__right {
-    margin: 0 auto;
-    width: 75%;
+    margin: 50px auto;
+    width: 70%;
     justify-content: center !important;
   }
 }

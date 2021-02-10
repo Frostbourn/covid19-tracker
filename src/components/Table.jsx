@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 import { fetchCountries } from "../api";
-import { sortData } from "../utils";
+import { sortDesc } from "../utils";
 
 function Table({ handleCountryChange }) {
   const [activeCases, setActiveCases] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const sortedData = sortData(await fetchCountries());
-      setActiveCases(sortedData);
+      await fetchCountries([0]).then((response) => {
+        const sortedData = sortDesc(response[0]);
+        setActiveCases(sortedData);
+      });
     };
     fetchAPI();
   }, []);
@@ -17,10 +19,16 @@ function Table({ handleCountryChange }) {
   return (
     <div className="table">
       {activeCases.map((country, i) => (
-        <tr key={i} onClick={() => handleCountryChange(country.name)}>
+        <tr
+          key={i}
+          onClick={() => handleCountryChange(country.code, country.name)}
+        >
           <td>
             <img
-              src={country.flag}
+              src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code
+                ? country.code
+                : ""
+              ).toLowerCase()}.svg`}
               width="20"
               style={{ paddingRight: "5px" }}
               alt="country-flag"

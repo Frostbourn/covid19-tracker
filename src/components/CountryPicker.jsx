@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { NativeSelect, FormControl } from "@material-ui/core";
+
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import { fetchCountries } from "../api";
+import { sortAlph } from "../utils";
 
 const CountryPicker = ({ handleCountryChange }) => {
   const [fetchedCountries, setFetchedCountries] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setFetchedCountries(await fetchCountries());
+      await fetchCountries().then((response) => {
+        const sortedData = sortAlph(response[0]);
+        setFetchedCountries(sortedData);
+      });
     };
     fetchAPI();
   }, [setFetchedCountries]);
 
   return (
-    <FormControl>
-      <NativeSelect
-        defaultValue=""
-        onChange={(e) => handleCountryChange(e.target.value)}
-        variant="filled"
-      >
-        <option value="">Worldwide</option>
-        {fetchedCountries.map((country, i) => (
-          <option key={i} value={country.name}>
-            {country.name}
-          </option>
-        ))}
-      </NativeSelect>
-    </FormControl>
+    <Autocomplete
+      style={{ width: 300 }}
+      options={fetchedCountries}
+      autoHighlight
+      getOptionLabel={(option) => option.name}
+      getOptionSelected={(option, value) => option.name === value.name}
+      onChange={(event, value) =>
+        value
+          ? handleCountryChange(value.code)
+          : handleCountryChange(event.target.value)
+      }
+      renderOption={(option) => <>{option.name}</>}
+      renderInput={(params) => (
+        <TextField {...params} label="Choose a country" variant="outlined" />
+      )}
+    />
   );
 };
 
