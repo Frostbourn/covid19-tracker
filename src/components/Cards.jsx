@@ -12,7 +12,7 @@ const Cards = ({
   dailyNewRecovered,
   totalRecovered
 }) => {
-  if (!dailyNewCases) {
+  if (!totalCases) {
     return <Spinner />;
   }
   return (
