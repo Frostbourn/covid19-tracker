@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Typography, Grid } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 import { Line, Pie } from "react-chartjs-2";
 
 import Spinner from "./Spinner";
