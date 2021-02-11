@@ -26,7 +26,7 @@ class App extends React.Component {
     totalDeaths: "",
     lat: "34.80746",
     lng: "-40.4796",
-    zoom: 2
+    zoom: 1
   };
 
   async componentDidMount() {
@@ -76,7 +76,7 @@ class App extends React.Component {
       countryName: countryCode == null ? null : data[2].data[0].country,
       lat: countryCode == null ? "34.80746" : data[2].data[0].lat,
       lng: countryCode == null ? "-40.4796" : data[2].data[0].lng,
-      zoom: countryCode == null ? 2 : 6
+      zoom: countryCode == null ? 1 : 3
     });
   };
 

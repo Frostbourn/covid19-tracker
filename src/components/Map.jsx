@@ -26,7 +26,7 @@ const Map = ({ data, lat, lng, zoom }) => {
               fillOpacity={0.4}
               stroke={false}
               fillColor="red"
-              radius={Math.sqrt(country.activeCases) * 600}
+              radius={Math.sqrt(country.activeCases) * 700}
             >
               <Popup>
                 <div className="info-container">
