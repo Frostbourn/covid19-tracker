@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Line, Pie } from "react-chartjs-2";
 
+import Spinner from "./Spinner";
 import { fetchCountries } from "../api";
 
 const Chart = ({ data: { cases, recovered, deaths }, country }) => {
@@ -13,63 +14,79 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
 
     fetchAPI();
   }, []);
+  console.log(dailyData[3]);
+  const lineChart =
+    dailyData[3] && !!dailyData[3].data.length ? (
+      <Line
+        data={{
+          labels: dailyData[3].data.map((data) => data.lastUpdated),
+          datasets: [
+            {
+              label: "Cases",
+              data: dailyData[3].data.map((data) => data.totalConfirmed),
+              borderColor: "rgb(22 133 255)",
+              backgroundColor: "transparent",
+              pointBackgroundColor: "rgb(22 133 255)",
+              pointBorderColor: "rgb(22 133 255)"
+            },
 
-  const lineChart = dailyData.length ? (
-    <Line
-      data={{
-        labels: dailyData
-          .slice(Math.max(dailyData.length - 120, 0))
-          .map(({ date }) => date),
-        datasets: [
-          {
-            data: dailyData.map(({ dailyConfirmed }) => dailyConfirmed),
-            borderColor: "#1685FF",
-            backgroundColor: "rgba(22, 135, 255, 0.452)"
-          }
-        ]
-      }}
-      options={{
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 3
-          }
-        },
-        tooltips: {
-          callbacks: {
-            label: function (tooltipItem, data) {
-              return tooltipItem.yLabel.toLocaleString();
-            }
-          }
-        },
-        scales: {
-          xAxes: [
             {
-              type: "time",
-              time: {
-                unit: "month",
-                displayFormats: {
-                  quarter: "MMM YYYY"
-                }
-              }
-            }
-          ],
-          yAxes: [
+              label: "Recovered",
+              data: dailyData[3].data.map((data) => data.totalRecovered),
+              borderColor: "rgb(87 213 151)",
+              backgroundColor: "transparent",
+              pointBackgroundColor: "rgb(87 213 151)",
+              pointBorderColor: "rgb(87 213 151)"
+            },
             {
-              display: true,
-              ticks: {
-                min: 0,
-                max: 150000,
-                stepSize: 10000
-              }
+              label: "Deaths",
+              data: dailyData[3].data.map((data) => data.totalDeaths),
+              borderColor: "rgb(255 65 105)",
+              backgroundColor: "transparent",
+              pointBackgroundColor: "rgb(255 65 105)",
+              pointBorderColor: "rgb(255 65 105)"
             }
           ]
-        }
-      }}
-    />
-  ) : null;
+        }}
+        options={{
+          elements: {
+            point: {
+              radius: 5
+            }
+          },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem, data) {
+                return tooltipItem.yLabel.toLocaleString();
+              }
+            }
+          },
+          scales: {
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  unit: "month",
+                  displayFormats: {
+                    quarter: "MMM YYYY"
+                  }
+                }
+              }
+            ],
+            yAxes: [
+              {
+                display: true,
+                ticks: {
+                  min: 0,
+                  max: 160000000,
+                  stepSize: 40000000
+                }
+              }
+            ]
+          }
+        }}
+      />
+    ) : null;
 
   const barChart = cases ? (
     <Pie
@@ -95,7 +112,9 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
       }}
     />
   ) : null;
-
+  if (!dailyData[3]) {
+    return <Spinner />;
+  }
   return <div className="app__chart">{country ? barChart : lineChart}</div>;
 };
 

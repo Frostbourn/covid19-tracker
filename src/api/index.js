@@ -57,10 +57,11 @@ const url = "https://api.coronatracker.com/v3/stats/worldometer";
 
 export const fetchCountries = async (countryCode) => {
   try {
-    const [global, topCountries, country] = await axios.all([
+    const [global, topCountries, country, dailyData] = await axios.all([
       axios.get(`${url}/global`),
       axios.get(`${url}/topCountry`),
-      axios.get(`${url}/country?countryCode=${countryCode}`)
+      axios.get(`${url}/country?countryCode=${countryCode}`),
+      axios.get(`${url}/totalTrendingCases?limit=100`)
     ]);
 
     const countriesData = topCountries.data
@@ -77,7 +78,7 @@ export const fetchCountries = async (countryCode) => {
         confirm: data.confirm
       }));
 
-    return [countriesData, global, country];
+    return [countriesData, global, country, dailyData];
   } catch (error) {
     console.log(error);
   }

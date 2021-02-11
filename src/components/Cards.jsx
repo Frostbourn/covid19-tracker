@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
+import Spinner from "./Spinner";
 import { nFormat } from "../utils";
 
 const Cards = ({
@@ -11,9 +12,9 @@ const Cards = ({
   dailyNewRecovered,
   totalRecovered
 }) => {
-  // if (!totalNewCases) {
-  //   return <Spinner />;
-  // }
+  if (!dailyNewCases) {
+    return <Spinner />;
+  }
   return (
     <Grid container justify="center" spacing={5}>
       <Grid item xs={10} md={4}>

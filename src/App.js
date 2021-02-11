@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 
-//import Cards from "./components/Cards";
-//import Chart from "./components/Chart";
+import Cards from "./components/Cards";
+import Chart from "./components/Chart";
 import CountryPicker from "./components/CountryPicker";
 //import Map from "./components/Map";
 //import Table from "./components/Table";
@@ -14,9 +14,9 @@ import "leaflet/dist/leaflet.css";
 
 import { fetchCountries } from "./api";
 
-const Cards = React.lazy(() => import("./components/Cards"));
 const Map = React.lazy(() => import("./components/Map"));
 const Table = React.lazy(() => import("./components/Table"));
+//const Chart = React.lazy(() => import("./components/Chart"));
 
 class App extends React.Component {
   state = {
@@ -97,7 +97,7 @@ class App extends React.Component {
       lng,
       zoom
     } = this.state;
-
+    //console.log(data);
     return (
       <div className="app">
         <div className="app__left">
@@ -111,17 +111,22 @@ class App extends React.Component {
             />
           </div>
           <div className="app__stats">
-            <Suspense fallback={<Spinner />}>
-              <Cards
-                data={data}
-                dailyNewCases={dailyNewCases}
-                totalCases={totalCases}
-                dailyNewDeaths={dailyNewDeaths}
-                totalDeaths={totalDeaths}
-                dailyNewRecovered={dailyNewRecovered}
-                totalRecovered={totalRecovered}
-              />
-            </Suspense>
+            <Cards
+              data={data}
+              dailyNewCases={dailyNewCases}
+              totalCases={totalCases}
+              dailyNewDeaths={dailyNewDeaths}
+              totalDeaths={totalDeaths}
+              dailyNewRecovered={dailyNewRecovered}
+              totalRecovered={totalRecovered}
+            />
+          </div>
+          <div className="app__charts">
+            <Card>
+              <CardContent>
+                <Chart data={data} country={countryName} />
+              </CardContent>
+            </Card>
           </div>
         </div>
         <Card className="app__right">
@@ -138,7 +143,6 @@ class App extends React.Component {
                   ? `Current total state in ${countryName}`
                   : `Daily change worldwide`}
               </h3>
-              {/* <Chart data={data} country={country} /> */}
             </CardContent>
           </Suspense>
         </Card>
