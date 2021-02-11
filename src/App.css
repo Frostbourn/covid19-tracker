@@ -34,7 +34,7 @@ body {
 
 .app__stats {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 30px;
 }
 
@@ -118,6 +118,10 @@ body {
   color: rgb(85, 85, 85);
 }
 
+.table table {
+  width: 100%;
+}
+
 .table tr {
   display: flex;
   justify-content: space-between;
@@ -135,6 +139,16 @@ body {
 
 .table tr:nth-last-of-type(odd) {
   background-color: #f1f1f1;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner img {
+  width: 30px;
+  padding: 30px;
 }
 
 @media (min-width: 1680px) {

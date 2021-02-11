@@ -8,11 +8,10 @@ function SetViewOnClick({ coords, zoom }) {
 
   return null;
 }
-
 const Map = ({ data, lat, lng, zoom }) => {
   return data ? (
     <div className="map">
-      <MapContainer center={[lat, lng]} scrollWheelZoom={false}>
+      <MapContainer center={[lat, lng]}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -31,6 +30,15 @@ const Map = ({ data, lat, lng, zoom }) => {
               <Popup>
                 <div className="info-container">
                   <div className="info-name">
+                    <img
+                      src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code
+                        ? country.code
+                        : ""
+                      ).toLowerCase()}.svg`}
+                      width="20"
+                      style={{ paddingRight: "5px" }}
+                      alt="country-flag"
+                    />
                     {country.name == null ? country.country : country.name}
                   </div>
                   <div className="info-confirmed">

@@ -1,10 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 
-import Cards from "./components/Cards";
+//import Cards from "./components/Cards";
 //import Chart from "./components/Chart";
 import CountryPicker from "./components/CountryPicker";
-import Map from "./components/Map";
-import Table from "./components/Table";
+//import Map from "./components/Map";
+//import Table from "./components/Table";
+import Spinner from "./components/Spinner";
 
 import { Card, CardContent } from "@material-ui/core";
 
@@ -13,7 +14,9 @@ import "leaflet/dist/leaflet.css";
 
 import { fetchCountries } from "./api";
 
-// const Map = React.lazy(() => import("./components/Map"));
+const Cards = React.lazy(() => import("./components/Cards"));
+const Map = React.lazy(() => import("./components/Map"));
+const Table = React.lazy(() => import("./components/Table"));
 
 class App extends React.Component {
   state = {
@@ -108,31 +111,36 @@ class App extends React.Component {
             />
           </div>
           <div className="app__stats">
-            <Cards
-              data={data}
-              dailyNewCases={dailyNewCases}
-              totalCases={totalCases}
-              dailyNewDeaths={dailyNewDeaths}
-              totalDeaths={totalDeaths}
-              dailyNewRecovered={dailyNewRecovered}
-              totalRecovered={totalRecovered}
-            />
+            <Suspense fallback={<Spinner />}>
+              <Cards
+                data={data}
+                dailyNewCases={dailyNewCases}
+                totalCases={totalCases}
+                dailyNewDeaths={dailyNewDeaths}
+                totalDeaths={totalDeaths}
+                dailyNewRecovered={dailyNewRecovered}
+                totalRecovered={totalRecovered}
+              />
+            </Suspense>
           </div>
         </div>
         <Card className="app__right">
-          <Suspense fallback={<h1>Loading profile...</h1>}></Suspense>
+          <Suspense fallback={<Spinner />}>
+            <Map data={data} lat={lat} lng={lng} zoom={zoom} />
+          </Suspense>
 
-          <Map data={data} lat={lat} lng={lng} zoom={zoom} />
-          <CardContent>
-            <h3>Active cases by country</h3>
-            <Table handleCountryChange={this.handleCountryChange} />
-            <h3 style={{ paddingTop: "40px" }}>
-              {countryName
-                ? `Current total state in ${countryName}`
-                : `Daily change worldwide`}
-            </h3>
-            {/* <Chart data={data} country={country} /> */}
-          </CardContent>
+          <Suspense fallback={<Spinner />}>
+            <CardContent>
+              <h3>Active cases by country</h3>
+              <Table handleCountryChange={this.handleCountryChange} />
+              <h3 style={{ paddingTop: "40px" }}>
+                {countryName
+                  ? `Current total state in ${countryName}`
+                  : `Daily change worldwide`}
+              </h3>
+              {/* <Chart data={data} country={country} /> */}
+            </CardContent>
+          </Suspense>
         </Card>
       </div>
     );

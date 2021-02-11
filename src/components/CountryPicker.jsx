@@ -26,7 +26,9 @@ const CountryPicker = ({ handleCountryChange, countryName }) => {
       autoHighlight
       value={countryName}
       getOptionLabel={(option) => (countryName ? countryName : option.name)}
-      getOptionSelected={(option, value) => option.name === value.name}
+      getOptionSelected={(option, value) =>
+        countryName || option.name === value.name
+      }
       onChange={(event, value) =>
         value
           ? handleCountryChange(value.code)

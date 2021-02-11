@@ -18,28 +18,32 @@ function Table({ handleCountryChange }) {
 
   return (
     <div className="table">
-      {activeCases.map((country, i) => (
-        <tr
-          key={i}
-          onClick={() => handleCountryChange(country.code, country.name)}
-        >
-          <td>
-            <img
-              src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code
-                ? country.code
-                : ""
-              ).toLowerCase()}.svg`}
-              width="20"
-              style={{ paddingRight: "5px" }}
-              alt="country-flag"
-            />
-            {country.name}
-          </td>
-          <td>
-            <strong>{country.activeCases.toLocaleString()}</strong>
-          </td>
-        </tr>
-      ))}
+      <table>
+        <tbody>
+          {activeCases.map((country, i) => (
+            <tr
+              key={i}
+              onClick={() => handleCountryChange(country.code, country.name)}
+            >
+              <td>
+                <img
+                  src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code
+                    ? country.code
+                    : ""
+                  ).toLowerCase()}.svg`}
+                  width="20"
+                  style={{ paddingRight: "5px" }}
+                  alt="country-flag"
+                />
+                {country.name}
+              </td>
+              <td>
+                <strong>{country.activeCases.toLocaleString()}</strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
-
 import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
@@ -24,9 +23,9 @@ const Cards = ({
     fetchAPI();
   }, [setGlobalData]);
 
-  if (!globalData.totalNewCases) {
-    return "Loading...";
-  }
+  // if (!globalData.totalNewCases) {
+  //   return <Spinner />;
+  // }
   return (
     <Grid container justify="center" spacing={5}>
       <Grid item xs={10} md={4}>
