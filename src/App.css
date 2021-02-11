@@ -39,9 +39,10 @@ body {
 }
 
 .app__charts {
-  display: flex;
-  justify-content: center;
-  padding: 30px 0;
+  margin-top: 30px !important;
+  position: relative;
+  width: 50vw;
+  height: auto;
 }
 
 .MuiCard-root {
@@ -53,10 +54,15 @@ body {
   border-radius: 0.25rem !important;
 }
 
+.MuiGrid-item {
+  padding: unset !important;
+}
+
 .MuiPaper-root {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 15px auto;
 }
 
 .infected {
@@ -171,8 +177,12 @@ body {
   }
 
   .app__right {
-    margin: 50px auto;
+    margin: 15px auto;
     width: 70%;
     justify-content: center !important;
+  }
+
+  .app__charts {
+    width: 70% !important;
   }
 }

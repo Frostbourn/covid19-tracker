@@ -121,13 +121,7 @@ class App extends React.Component {
               totalRecovered={totalRecovered}
             />
           </div>
-          <div className="app__charts">
-            <Card>
-              <CardContent>
-                <Chart data={data} country={countryName} />
-              </CardContent>
-            </Card>
-          </div>
+          <Chart data={data} country={countryName} />
         </div>
         <Card className="app__right">
           <Suspense fallback={<Spinner />}>

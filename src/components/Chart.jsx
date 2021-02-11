@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import { Line, Pie } from "react-chartjs-2";
 
 import Spinner from "./Spinner";
@@ -49,6 +50,8 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
           ]
         }}
         options={{
+          responsive: true,
+          maintainAspectRatio: true,
           elements: {
             point: {
               radius: 5
@@ -115,7 +118,11 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
   if (!dailyData[3]) {
     return <Spinner />;
   }
-  return <div className="app__chart">{country ? barChart : lineChart}</div>;
+  return (
+    <Card className="app__charts">
+      <CardContent>{country ? barChart : lineChart}</CardContent>
+    </Card>
+  );
 };
 
 export default Chart;
