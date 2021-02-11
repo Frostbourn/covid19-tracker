@@ -11,6 +11,7 @@ import { Card, CardContent } from "@material-ui/core";
 
 import "./App.css";
 import "leaflet/dist/leaflet.css";
+import mainLogo from "./assets/images/logo.png";
 
 import { fetchCountries } from "./api";
 
@@ -103,7 +104,7 @@ class App extends React.Component {
         <div className="app__left">
           <div className="app__header">
             <div className="app__logo">
-              <h1>COVID19 TRACKER</h1>
+              <img src={mainLogo} alt="Covid-19" />
             </div>
             <CountryPicker
               handleCountryChange={this.handleCountryChange}
