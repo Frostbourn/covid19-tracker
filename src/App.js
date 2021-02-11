@@ -19,7 +19,7 @@ class App extends React.Component {
   state = {
     data: {},
     countryCode: "",
-    countryName: "",
+    countryName: null,
     dailyNewCases: "",
     totalCases: "",
     dailyNewDeaths: "",
@@ -44,7 +44,7 @@ class App extends React.Component {
     });
   }
 
-  handleCountryChange = async (countryCode) => {
+  handleCountryChange = async (countryCode, countryName) => {
     const data = await fetchCountries(countryCode);
     this.setState({
       data: countryCode == null ? data[0] : data[2].data,
@@ -102,7 +102,10 @@ class App extends React.Component {
             <div className="app__logo">
               <h1>COVID19 TRACKER</h1>
             </div>
-            <CountryPicker handleCountryChange={this.handleCountryChange} />
+            <CountryPicker
+              handleCountryChange={this.handleCountryChange}
+              countryName={countryName}
+            />
           </div>
           <div className="app__stats">
             <Cards

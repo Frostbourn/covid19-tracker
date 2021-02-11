@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { fetchCountries } from "../api";
 import { sortAlph } from "../utils";
 
-const CountryPicker = ({ handleCountryChange }) => {
+const CountryPicker = ({ handleCountryChange, countryName }) => {
   const [fetchedCountries, setFetchedCountries] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,8 @@ const CountryPicker = ({ handleCountryChange }) => {
       style={{ width: 300 }}
       options={fetchedCountries}
       autoHighlight
-      getOptionLabel={(option) => option.name}
+      value={countryName}
+      getOptionLabel={(option) => (countryName ? countryName : option.name)}
       getOptionSelected={(option, value) => option.name === value.name}
       onChange={(event, value) =>
         value
