@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
-import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
 const Cards = ({
@@ -12,18 +11,7 @@ const Cards = ({
   dailyNewRecovered,
   totalRecovered
 }) => {
-  const [globalData, setGlobalData] = useState([]);
-
-  useEffect(() => {
-    const fetchAPI = async () => {
-      await fetchCountries().then((response) => {
-        setGlobalData(response[1].data);
-      });
-    };
-    fetchAPI();
-  }, [setGlobalData]);
-
-  // if (!globalData.totalNewCases) {
+  // if (!totalNewCases) {
   //   return <Spinner />;
   // }
   return (
