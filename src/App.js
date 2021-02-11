@@ -22,7 +22,7 @@ const Table = React.lazy(() => import("./components/Table"));
 class App extends React.Component {
   state = {
     data: {},
-    countryCode: "",
+    countryCode: null,
     countryName: null,
     dailyNewCases: "",
     totalCases: "",
@@ -90,6 +90,7 @@ class App extends React.Component {
       dailyNewCases,
       totalCases,
       countryName,
+      countryCode,
       dailyNewDeaths,
       totalDeaths,
       dailyNewRecovered,
@@ -101,46 +102,53 @@ class App extends React.Component {
     //console.log(data);
     return (
       <div className="app">
-        <div className="app__left">
-          <div className="app__header">
-            <div className="app__logo">
-              <img src={mainLogo} alt="Covid-19" />
-            </div>
-            <CountryPicker
-              handleCountryChange={this.handleCountryChange}
-              countryName={countryName}
-            />
+        <div className="app__header">
+          <div className="app__logo">
+            <img src={mainLogo} alt="Covid-19" />
           </div>
-          <div className="app__stats">
-            <Cards
-              data={data}
-              dailyNewCases={dailyNewCases}
-              totalCases={totalCases}
-              dailyNewDeaths={dailyNewDeaths}
-              totalDeaths={totalDeaths}
-              dailyNewRecovered={dailyNewRecovered}
-              totalRecovered={totalRecovered}
-            />
-          </div>
-          <Chart data={data} country={countryName} />
+          <CountryPicker
+            handleCountryChange={this.handleCountryChange}
+            countryName={countryName}
+          />
         </div>
-        <Card className="app__right">
-          <Suspense fallback={<Spinner />}>
-            <Map data={data} lat={lat} lng={lng} zoom={zoom} />
-          </Suspense>
+        <div className="app__content">
+          <div className="content__left">
+            <h3 style={{ paddingTop: "40px" }}>
+              {countryName
+                ? `Current daily state in ${countryName}`
+                : `Daily change worldwide`}
+            </h3>
+            <div className="app__stats">
+              <Cards
+                data={data}
+                dailyNewCases={dailyNewCases}
+                totalCases={totalCases}
+                dailyNewDeaths={dailyNewDeaths}
+                totalDeaths={totalDeaths}
+                dailyNewRecovered={dailyNewRecovered}
+                totalRecovered={totalRecovered}
+              />
+            </div>
+            <Chart
+              totalCases={totalCases}
+              totalDeaths={totalDeaths}
+              totalRecovered={totalRecovered}
+              countryCode={countryCode}
+            />
+          </div>
+          <Card className="content__right">
+            <Suspense fallback={<Spinner />}>
+              <Map data={data} lat={lat} lng={lng} zoom={zoom} />
+            </Suspense>
 
-          <Suspense fallback={<Spinner />}>
-            <CardContent>
-              <h3>Active cases by country</h3>
-              <Table handleCountryChange={this.handleCountryChange} />
-              <h3 style={{ paddingTop: "40px" }}>
-                {countryName
-                  ? `Current total state in ${countryName}`
-                  : `Daily change worldwide`}
-              </h3>
-            </CardContent>
-          </Suspense>
-        </Card>
+            <Suspense fallback={<Spinner />}>
+              <CardContent>
+                <h3>Active cases by country</h3>
+                <Table handleCountryChange={this.handleCountryChange} />
+              </CardContent>
+            </Suspense>
+          </Card>
+        </div>
       </div>
     );
   }

@@ -15,7 +15,7 @@ function Table({ handleCountryChange }) {
     };
     fetchAPI();
   }, []);
-
+  console.log(activeCases);
   return (
     <div className="table">
       <table>

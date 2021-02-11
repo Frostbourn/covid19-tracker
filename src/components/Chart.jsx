@@ -4,8 +4,9 @@ import { Line, Pie } from "react-chartjs-2";
 
 import Spinner from "./Spinner";
 import { fetchCountries } from "../api";
+import { nFormat } from "../utils";
 
-const Chart = ({ data: { cases, recovered, deaths }, country }) => {
+const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
 
     fetchAPI();
   }, []);
-  console.log(dailyData[3]);
+  console.log(dailyData);
   const lineChart =
     dailyData[3] && !!dailyData[3].data.length ? (
       <Line
@@ -23,7 +24,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
           labels: dailyData[3].data.map((data) => data.lastUpdated),
           datasets: [
             {
-              label: "Cases",
+              label: "Total Confirmed",
               data: dailyData[3].data.map((data) => data.totalConfirmed),
               borderColor: "rgb(22 133 255)",
               backgroundColor: "transparent",
@@ -32,7 +33,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
             },
 
             {
-              label: "Recovered",
+              label: "Total Recovered",
               data: dailyData[3].data.map((data) => data.totalRecovered),
               borderColor: "rgb(87 213 151)",
               backgroundColor: "transparent",
@@ -40,7 +41,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
               pointBorderColor: "rgb(87 213 151)"
             },
             {
-              label: "Deaths",
+              label: "Total Deaths",
               data: dailyData[3].data.map((data) => data.totalDeaths),
               borderColor: "rgb(255 65 105)",
               backgroundColor: "transparent",
@@ -64,6 +65,12 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
               }
             }
           },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true
+            }
+          },
           scales: {
             xAxes: [
               {
@@ -82,7 +89,14 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
                 ticks: {
                   min: 0,
                   max: 160000000,
-                  stepSize: 40000000
+                  stepSize: 40000000,
+                  callback: function (value, index, values) {
+                    if (value >= 1000) {
+                      return nFormat(value);
+                    } else {
+                      return value;
+                    }
+                  }
                 }
               }
             ]
@@ -91,7 +105,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
       />
     ) : null;
 
-  const barChart = cases ? (
+  const pieChart = totalCases ? (
     <Pie
       data={{
         labels: ["Infected", "Recovered", "Deaths"],
@@ -99,7 +113,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
           {
             label: "People",
             backgroundColor: ["#1685FF", "#57D597", "#FF4169"],
-            data: [cases, recovered, deaths]
+            data: [totalCases, totalRecovered, totalDeaths]
           }
         ]
       }}
@@ -120,7 +134,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
   }
   return (
     <Card className="app__charts">
-      <CardContent>{country ? barChart : lineChart}</CardContent>
+      <CardContent>{countryCode == null ? lineChart : pieChart}</CardContent>
     </Card>
   );
 };

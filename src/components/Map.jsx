@@ -31,8 +31,9 @@ const Map = ({ data, lat, lng, zoom }) => {
                 <div className="info-container">
                   <div className="info-name">
                     <img
-                      src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code
-                        ? country.code
+                      src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.code ||
+                      data[0].countryCode
+                        ? country.code || data[0].countryCode
                         : ""
                       ).toLowerCase()}.svg`}
                       width="20"
