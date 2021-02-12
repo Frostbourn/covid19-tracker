@@ -10,7 +10,7 @@ function TwitterWidget() {
           screenName: "WHO"
         }}
         options={{
-          height: "500"
+          height: "600"
         }}
       />
     </>
