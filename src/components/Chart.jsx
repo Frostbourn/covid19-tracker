@@ -107,7 +107,7 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
   const pieChart = totalCases ? (
     <Pie
       data={{
-        labels: ["Infected", "Recovered", "Deaths"],
+        labels: ["Confirmed", "Recovered", "Deaths"],
         datasets: [
           {
             label: "People",
@@ -126,6 +126,13 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
         elements: {
           point: {
             radius: 0
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              return tooltipItem.yLabel.toLocaleString();
+            }
           }
         }
       }}
