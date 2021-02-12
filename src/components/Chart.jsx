@@ -127,13 +127,6 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
           point: {
             radius: 0
           }
-        },
-        tooltips: {
-          callbacks: {
-            label: function (tooltipItem, data) {
-              return tooltipItem.yLabel.toLocaleString();
-            }
-          }
         }
       }}
     />

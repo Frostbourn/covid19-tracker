@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 
 import Cards from "./components/Cards";
 import Chart from "./components/Chart";
+import News from "./components/News";
 import CountryPicker from "./components/CountryPicker";
 import Map from "./components/Map";
 import Table from "./components/Table";
@@ -27,7 +28,8 @@ class App extends React.Component {
     totalDeaths: "",
     lat: "34.80746",
     lng: "-40.4796",
-    zoom: 1
+    zoom: 1,
+    news: ""
   };
 
   async componentDidMount() {
@@ -41,7 +43,8 @@ class App extends React.Component {
       totalDeaths: data[1].data.totalDeaths,
       dailyNewRecovered:
         data[1].data.totalNewCases - data[1].data.totalNewDeaths,
-      totalRecovered: data[1].data.totalRecovered
+      totalRecovered: data[1].data.totalRecovered,
+      news: data[4].data
     });
   }
 
@@ -77,7 +80,8 @@ class App extends React.Component {
       countryName: countryCode == null ? null : data[2].data[0].country,
       lat: countryCode == null ? "34.80746" : data[2].data[0].lat,
       lng: countryCode == null ? "-40.4796" : data[2].data[0].lng,
-      zoom: countryCode == null ? 1 : 3
+      zoom: countryCode == null ? 1 : 3,
+      news: countryCode == null ? "" : data[4].data
     });
   };
 
@@ -94,7 +98,8 @@ class App extends React.Component {
       totalRecovered,
       lat,
       lng,
-      zoom
+      zoom,
+      news
     } = this.state;
     //console.log(data);
     return (
@@ -111,7 +116,7 @@ class App extends React.Component {
 
         <Suspense fallback={<Spinner />}>
           <Grid container className="app__content" justify="center">
-            <Grid item md={6} className="content__left">
+            <Grid item xs={12} md={6} className="content__left">
               <div className="app__stats">
                 <Cards
                   data={data}
@@ -134,15 +139,16 @@ class App extends React.Component {
                 totalRecovered={totalRecovered}
                 countryCode={countryCode}
               />
+              <News data={news} />
             </Grid>
-            <Grid item md={4} className="content__right">
+            <Grid item xs={10} md={4} className="content__right">
               <Card>
                 <Map data={data} lat={lat} lng={lng} zoom={zoom} />
                 <CardContent>
                   <h3>Active cases by country</h3>
                   <Table handleCountryChange={this.handleCountryChange} />
+                  <TwitterWidget />
                 </CardContent>
-                <TwitterWidget />
               </Card>
             </Grid>
           </Grid>

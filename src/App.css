@@ -89,6 +89,10 @@ body {
   border-bottom: 10px solid #ff4169 !important;
 }
 
+.article__image {
+  height: 140px;
+}
+
 .map {
   min-width: 15vw;
   height: 300px;
@@ -131,7 +135,7 @@ body {
 }
 
 .table {
-  margin-top: 20px;
+  margin: 1rem 0;
   overflow-y: scroll;
   height: 400px;
   color: rgb(85, 85, 85);
@@ -180,12 +184,10 @@ body {
     justify-content: center !important;
   }
 
-  /* .content__right {
-    margin: 15px auto;
-    width: 70%;
-    justify-content: center !important;
+  .content__right {
+    margin: 2rem auto;
   }
-
+  /*
   .app__charts {
     width: 70% !important;
   } */
