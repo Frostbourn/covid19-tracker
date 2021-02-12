@@ -21,26 +21,29 @@ body {
     0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1) !important;
 }
 
+.app__logo {
+  overflow: hidden;
+}
+
 .app__logo img {
-  max-width: 400px;
+  max-width: 350px;
 }
 
 .app__content {
-  display: flex;
-  justify-content: center;
+  margin-top: 5rem;
 }
 
 .MuiAutocomplete-root {
   padding: 10px 30px;
 }
 
-.content__left {
+/* .content__left {
   margin: 1rem;
 }
 
 .content__right {
   margin: 7rem 2rem !important;
-}
+} */
 
 .MuiAutocomplete-listbox {
   width: 100%;
@@ -87,7 +90,7 @@ body {
 }
 
 .map {
-  min-width: 350px;
+  min-width: 15vw;
   height: 300px;
   background-color: white;
 }
@@ -172,12 +175,12 @@ body {
 
 @media (max-width: 990px) {
   .app__header {
-    flex-direction: column;
+    flex-direction: row;
     padding-bottom: 30px;
     justify-content: center !important;
   }
 
-  .content__right {
+  /* .content__right {
     margin: 15px auto;
     width: 70%;
     justify-content: center !important;
@@ -185,5 +188,5 @@ body {
 
   .app__charts {
     width: 70% !important;
-  }
+  } */
 }

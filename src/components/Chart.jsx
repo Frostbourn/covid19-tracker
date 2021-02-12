@@ -133,7 +133,7 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
     return <Spinner />;
   }
   return (
-    <Card className="app__charts">
+    <Card className="app__charts" justify="center">
       <CardContent>{countryCode == null ? lineChart : pieChart}</CardContent>
     </Card>
   );

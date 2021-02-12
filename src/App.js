@@ -7,7 +7,7 @@ import CountryPicker from "./components/CountryPicker";
 //import Table from "./components/Table";
 import Spinner from "./components/Spinner";
 
-import { Card, CardContent } from "@material-ui/core";
+import { Grid, Card, CardContent } from "@material-ui/core";
 
 import "./App.css";
 import "leaflet/dist/leaflet.css";
@@ -111,13 +111,13 @@ class App extends React.Component {
             countryName={countryName}
           />
         </div>
-        <div className="app__content">
-          <div className="content__left">
-            <h3 style={{ paddingTop: "40px" }}>
+        <Grid container className="app__content" justify="center">
+          <Grid item md={6} className="content__left">
+            {/* <h3 style={{ paddingTop: "40px" }}>
               {countryName
                 ? `Current daily state in ${countryName}`
                 : `Daily change worldwide`}
-            </h3>
+            </h3> */}
             <div className="app__stats">
               <Cards
                 data={data}
@@ -135,20 +135,22 @@ class App extends React.Component {
               totalRecovered={totalRecovered}
               countryCode={countryCode}
             />
-          </div>
-          <Card className="content__right">
-            <Suspense fallback={<Spinner />}>
-              <Map data={data} lat={lat} lng={lng} zoom={zoom} />
-            </Suspense>
+          </Grid>
+          <Grid item md={4} alignContent="center" className="content__right">
+            <Card>
+              <Suspense fallback={<Spinner />}>
+                <Map data={data} lat={lat} lng={lng} zoom={zoom} />
+              </Suspense>
 
-            <Suspense fallback={<Spinner />}>
-              <CardContent>
-                <h3>Active cases by country</h3>
-                <Table handleCountryChange={this.handleCountryChange} />
-              </CardContent>
-            </Suspense>
-          </Card>
-        </div>
+              <Suspense fallback={<Spinner />}>
+                <CardContent>
+                  <h3>Active cases by country</h3>
+                  <Table handleCountryChange={this.handleCountryChange} />
+                </CardContent>
+              </Suspense>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     );
   }
