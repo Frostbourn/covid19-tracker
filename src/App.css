@@ -185,7 +185,7 @@ body {
   }
 
   .content__right {
-    margin: 2rem auto;
+    margin: 2rem auto !important;
   }
   /*
   .app__charts {
