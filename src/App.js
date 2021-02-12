@@ -5,6 +5,7 @@ import Chart from "./components/Chart";
 import CountryPicker from "./components/CountryPicker";
 import Map from "./components/Map";
 import Table from "./components/Table";
+import TwitterWidget from "./components/TwitterWidget";
 import Spinner from "./components/Spinner";
 
 import { Grid, Card, CardContent } from "@material-ui/core";
@@ -134,14 +135,14 @@ class App extends React.Component {
                 countryCode={countryCode}
               />
             </Grid>
-            <Grid item md={4} alignContent="center" className="content__right">
+            <Grid item md={4} className="content__right">
               <Card>
                 <Map data={data} lat={lat} lng={lng} zoom={zoom} />
-
                 <CardContent>
                   <h3>Active cases by country</h3>
                   <Table handleCountryChange={this.handleCountryChange} />
                 </CardContent>
+              <TwitterWidget />
               </Card>
             </Grid>
           </Grid>

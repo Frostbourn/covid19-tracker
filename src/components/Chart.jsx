@@ -118,7 +118,10 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
       }}
       options={{
         legend: {
-          display: false
+          display: true,
+          labels: {
+            usePointStyle: true
+          }
         },
         elements: {
           point: {
