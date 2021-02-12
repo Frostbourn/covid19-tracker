@@ -3,8 +3,8 @@ import React, { Suspense } from "react";
 import Cards from "./components/Cards";
 import Chart from "./components/Chart";
 import CountryPicker from "./components/CountryPicker";
-//import Map from "./components/Map";
-//import Table from "./components/Table";
+import Map from "./components/Map";
+import Table from "./components/Table";
 import Spinner from "./components/Spinner";
 
 import { Grid, Card, CardContent } from "@material-ui/core";
@@ -14,10 +14,6 @@ import "leaflet/dist/leaflet.css";
 import mainLogo from "./assets/images/logo.png";
 
 import { fetchCountries } from "./api";
-
-const Map = React.lazy(() => import("./components/Map"));
-const Table = React.lazy(() => import("./components/Table"));
-//const Chart = React.lazy(() => import("./components/Chart"));
 
 class App extends React.Component {
   state = {
@@ -111,46 +107,45 @@ class App extends React.Component {
             countryName={countryName}
           />
         </div>
-        <Grid container className="app__content" justify="center">
-          <Grid item md={6} className="content__left">
-            {/* <h3 style={{ paddingTop: "40px" }}>
+
+        <Suspense fallback={<Spinner />}>
+          <Grid container className="app__content" justify="center">
+            <Grid item md={6} className="content__left">
+              {/* <h3 style={{ paddingTop: "40px" }}>
               {countryName
                 ? `Current daily state in ${countryName}`
                 : `Daily change worldwide`}
             </h3> */}
-            <div className="app__stats">
-              <Cards
-                data={data}
-                dailyNewCases={dailyNewCases}
+              <div className="app__stats">
+                <Cards
+                  data={data}
+                  dailyNewCases={dailyNewCases}
+                  totalCases={totalCases}
+                  dailyNewDeaths={dailyNewDeaths}
+                  totalDeaths={totalDeaths}
+                  dailyNewRecovered={dailyNewRecovered}
+                  totalRecovered={totalRecovered}
+                />
+              </div>
+              <Chart
                 totalCases={totalCases}
-                dailyNewDeaths={dailyNewDeaths}
                 totalDeaths={totalDeaths}
-                dailyNewRecovered={dailyNewRecovered}
                 totalRecovered={totalRecovered}
+                countryCode={countryCode}
               />
-            </div>
-            <Chart
-              totalCases={totalCases}
-              totalDeaths={totalDeaths}
-              totalRecovered={totalRecovered}
-              countryCode={countryCode}
-            />
-          </Grid>
-          <Grid item md={4} alignContent="center" className="content__right">
-            <Card>
-              <Suspense fallback={<Spinner />}>
+            </Grid>
+            <Grid item md={4} alignContent="center" className="content__right">
+              <Card>
                 <Map data={data} lat={lat} lng={lng} zoom={zoom} />
-              </Suspense>
 
-              <Suspense fallback={<Spinner />}>
                 <CardContent>
                   <h3>Active cases by country</h3>
                   <Table handleCountryChange={this.handleCountryChange} />
                 </CardContent>
-              </Suspense>
-            </Card>
+              </Card>
+            </Grid>
           </Grid>
-        </Grid>
+        </Suspense>
       </div>
     );
   }

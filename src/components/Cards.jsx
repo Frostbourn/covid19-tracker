@@ -13,7 +13,7 @@ const Cards = ({
   totalRecovered
 }) => {
   if (!totalCases) {
-    return <Spinner />;
+    return "";
   }
   return (
     <Grid container justify="center" spacing={5}>

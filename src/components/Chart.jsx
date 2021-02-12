@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@material-ui/core";
 import { Line, Pie } from "react-chartjs-2";
 
-import Spinner from "./Spinner";
 import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
@@ -16,7 +15,7 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
 
     fetchAPI();
   }, []);
-  console.log(dailyData);
+
   const lineChart =
     dailyData[3] && !!dailyData[3].data.length ? (
       <Line
@@ -130,7 +129,7 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
     />
   ) : null;
   if (!dailyData[3]) {
-    return <Spinner />;
+    return "";
   }
   return (
     <Card className="app__charts" justify="center">
