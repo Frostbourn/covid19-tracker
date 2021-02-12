@@ -112,11 +112,6 @@ class App extends React.Component {
         <Suspense fallback={<Spinner />}>
           <Grid container className="app__content" justify="center">
             <Grid item md={6} className="content__left">
-              {/* <h3 style={{ paddingTop: "40px" }}>
-              {countryName
-                ? `Current daily state in ${countryName}`
-                : `Daily change worldwide`}
-            </h3> */}
               <div className="app__stats">
                 <Cards
                   data={data}
@@ -128,6 +123,11 @@ class App extends React.Component {
                   totalRecovered={totalRecovered}
                 />
               </div>
+              <h3 style={{ paddingTop: "40px" }}>
+                {countryName
+                  ? `Current daily state in ${countryName}`
+                  : `Daily change worldwide`}
+              </h3>
               <Chart
                 totalCases={totalCases}
                 totalDeaths={totalDeaths}
@@ -142,7 +142,7 @@ class App extends React.Component {
                   <h3>Active cases by country</h3>
                   <Table handleCountryChange={this.handleCountryChange} />
                 </CardContent>
-              <TwitterWidget />
+                <TwitterWidget />
               </Card>
             </Grid>
           </Grid>
