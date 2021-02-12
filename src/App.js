@@ -49,7 +49,7 @@ class App extends React.Component {
   }
 
   handleCountryChange = async (countryCode, countryName) => {
-    const data = await fetchCountries(countryCode);
+    const data = await fetchCountries(countryCode, countryName);
     this.setState({
       data: countryCode == null ? data[0] : data[2].data,
       dailyNewCases:
@@ -77,11 +77,11 @@ class App extends React.Component {
           ? data[1].data.totalRecovered
           : data[2].data[0].totalRecovered,
       countryCode: countryCode == null ? null : countryCode,
-      countryName: countryCode == null ? null : data[2].data[0].country,
+      countryName: countryName == null ? null : data[2].data[0].country,
       lat: countryCode == null ? "34.80746" : data[2].data[0].lat,
       lng: countryCode == null ? "-40.4796" : data[2].data[0].lng,
       zoom: countryCode == null ? 1 : 3,
-      news: countryCode == null ? "" : data[4].data
+      news: data[4].data
     });
   };
 

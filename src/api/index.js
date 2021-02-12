@@ -55,7 +55,7 @@ const url = "https://api.coronatracker.com/v3/stats/worldometer";
 //   }
 // };
 
-export const fetchCountries = async (countryCode) => {
+export const fetchCountries = async (countryCode, countryName) => {
   try {
     const [global, topCountries, country, dailyData, news] = await axios.all([
       axios.get(`${url}/global`),
@@ -63,7 +63,9 @@ export const fetchCountries = async (countryCode) => {
       axios.get(`${url}/country?countryCode=${countryCode}`),
       axios.get(`${url}/totalTrendingCases?limit=100`),
       axios.get(
-        `https://api.coronatracker.com/news/trending?limit=5&offset=45&country=${countryCode}`
+        `https://api.coronatracker.com/news/trending?limit=5&offset=45&country=${
+          countryName ? countryName : "USA"
+        }`
       )
     ]);
 
