@@ -8,7 +8,7 @@ import Map from "./components/Map";
 import Table from "./components/Table";
 import TwitterWidget from "./components/TwitterWidget";
 import Spinner from "./components/Spinner";
-
+import ScrollToTop from "react-scroll-to-top";
 import { Grid, Card, CardContent } from "@material-ui/core";
 
 import "./App.css";
@@ -153,6 +153,7 @@ class App extends React.Component {
             </Grid>
           </Grid>
         </Suspense>
+        <ScrollToTop smooth viewBox="0 0 24 24" svgPath="M18 15l-6-6-6 6" />
       </div>
     );
   }

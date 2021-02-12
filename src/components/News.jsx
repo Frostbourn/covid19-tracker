@@ -5,22 +5,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-//import { fetchCountries } from "../api";
-//import { nFormat } from "../utils";
 
 function News({ data }) {
-  // const [news, setNews] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchAPI = async () => {
-  //     await fetchCountries().then((data) => {
-  //       setNews(data);
-  //     });
-  //   };
-
-  //   fetchAPI();
-  // }, []);
-  console.log(data);
   return (
     <Grid container spacing={5} justify="center">
       {data.items &&
