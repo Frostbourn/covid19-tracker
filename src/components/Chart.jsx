@@ -5,7 +5,13 @@ import { Line, Pie } from "react-chartjs-2";
 import { fetchCountries } from "../api";
 import { nFormat } from "../utils";
 
-const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
+const Chart = ({
+  totalCases,
+  totalDeaths,
+  totalRecovered,
+  countryCode,
+  countryName
+}) => {
   const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
@@ -136,7 +142,14 @@ const Chart = ({ totalCases, totalDeaths, totalRecovered, countryCode }) => {
   }
   return (
     <Card className="app__charts" justify="center">
-      <CardContent>{countryCode == null ? lineChart : pieChart}</CardContent>
+      <CardContent>
+        <h3>
+          {countryName
+            ? `Current daily state in ${countryName}`
+            : `Daily change worldwide`}
+        </h3>
+        {countryCode == null ? lineChart : pieChart}
+      </CardContent>
     </Card>
   );
 };

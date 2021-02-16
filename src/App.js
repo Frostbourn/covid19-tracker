@@ -128,16 +128,12 @@ class App extends React.Component {
                   totalRecovered={totalRecovered}
                 />
               </div>
-              <h3 style={{ paddingTop: "40px" }}>
-                {countryName
-                  ? `Current daily state in ${countryName}`
-                  : `Daily change worldwide`}
-              </h3>
               <Chart
                 totalCases={totalCases}
                 totalDeaths={totalDeaths}
                 totalRecovered={totalRecovered}
                 countryCode={countryCode}
+                countryName={countryName}
               />
               <News data={news} />
             </Grid>
