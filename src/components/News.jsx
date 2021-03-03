@@ -12,7 +12,7 @@ function News({ data }) {
       {data.items &&
         !!data.items.length &&
         data.items.map((article, i) => (
-          <Grid item xs={10} md={11}>
+          <Grid key={i} item xs={10} md={11}>
             <Card className="article" style={{ padding: "unset" }}>
               <CardActionArea>
                 <CardMedia

@@ -37,14 +37,6 @@ body {
   padding: 10px 30px;
 }
 
-/* .content__left {
-  margin: 1rem;
-}
-
-.content__right {
-  margin: 7rem 2rem !important;
-} */
-
 .MuiAutocomplete-listbox {
   width: 100%;
 }
@@ -187,8 +179,4 @@ body {
   .content__right {
     margin: 2rem auto !important;
   }
-  /*
-  .app__charts {
-    width: 70% !important;
-  } */
 }
