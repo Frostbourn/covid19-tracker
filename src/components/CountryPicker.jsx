@@ -8,6 +8,7 @@ import { sortAlph } from "../utils";
 
 const CountryPicker = ({ handleCountryChange, countryName }) => {
   const [fetchedCountries, setFetchedCountries] = useState([]);
+  const [value, setValue] = useState();
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -24,14 +25,18 @@ const CountryPicker = ({ handleCountryChange, countryName }) => {
       style={{ width: 300 }}
       options={fetchedCountries}
       autoHighlight
-      value={countryName}
+      //autoSelect
+      selectOnFocus
+      clearOnBlur
+      //value={countryName}
       getOptionLabel={(option) => (countryName ? countryName : option.name)}
-      getOptionSelected={(option, value) => option.name === value.name}
+      getOptionSelected={(option, value) => option.name === value}
       onChange={(event, value) =>
         value
           ? handleCountryChange(value.code)
           : handleCountryChange(event.target.value)
       }
+      renderOption={(option) => <>{option.name}</>}
       renderInput={(params) => (
         <TextField {...params} label="Choose a country" variant="outlined" />
       )}
