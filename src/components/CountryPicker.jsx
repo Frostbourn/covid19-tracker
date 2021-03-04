@@ -26,15 +26,12 @@ const CountryPicker = ({ handleCountryChange, countryName }) => {
       autoHighlight
       value={countryName}
       getOptionLabel={(option) => (countryName ? countryName : option.name)}
-      getOptionSelected={(option, value) =>
-        countryName || option.name === value.name
-      }
+      getOptionSelected={(option, value) => option.name === value.name}
       onChange={(event, value) =>
         value
           ? handleCountryChange(value.code)
           : handleCountryChange(event.target.value)
       }
-      renderOption={(option) => <>{option.name}</>}
       renderInput={(params) => (
         <TextField {...params} label="Choose a country" variant="outlined" />
       )}

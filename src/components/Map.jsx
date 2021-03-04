@@ -9,7 +9,6 @@ function SetViewOnClick({ coords, zoom }) {
   return null;
 }
 const Map = ({ data, lat, lng, zoom }) => {
-  console.log(data);
   return data ? (
     <div className="map">
       <MapContainer center={[lat, lng]}>
